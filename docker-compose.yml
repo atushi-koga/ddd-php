@@ -1,0 +1,29 @@
+version: "3"
+volumes:
+  not_mount:
+services:
+  web:
+    image: atsushikoga/apache-php:2.4-7.2
+    ports:
+      - "80:80"
+      - "443:443"
+    privileged: true
+    links:
+      - db
+    volumes:
+      - "./:/var/www/html"
+      - "not_mount:/var/www/html/node_modules"
+      - "not_mount:/var/www/html/public/storage"
+    container_name: "apache-php"
+  db:
+    image: postgres:10
+    environment:
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "5432:5432"
+    volumes:
+      - "./container/:/docker-entrypoint-initdb.d"
+    container_name: "psql"
+  selenium:
+    image: selenium/standalone-chrome:latest
