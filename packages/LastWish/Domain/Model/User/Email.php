@@ -48,6 +48,7 @@ class Email
         return $value !== '' && !is_null($value);
     }
 
+    // @todo: 文字数制限をつける
     public static function validateFormat($value): bool
     {
         return filter_var($value, FILTER_VALIDATE_EMAIL) !== false;

@@ -7,6 +7,8 @@ use Hash;
 
 class User
 {
+    private $id;
+
     /** @var Email */
     private $email;
 
@@ -21,6 +23,16 @@ class User
     public static function of($email)
     {
         return new self($email);
+    }
+
+    public function id(): int
+    {
+        return $this->id;
+    }
+
+    public function setId(int $id): void
+    {
+        $this->id = $id;
     }
 
     public function email(): Email
@@ -42,5 +54,10 @@ class User
     public function setPassword(Password $password): void
     {
         $this->password = Hash::make($password->value());
+    }
+
+    public function setHashPassword(string $password): void
+    {
+        $this->password = $password;
     }
 }

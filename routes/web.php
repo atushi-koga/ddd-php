@@ -18,18 +18,21 @@ Route::get('/', function () {
     ->name('home');
 
 Route::get('/sign-up', function () {
-    return view('index');
+    return view('sign_up');
 })
     ->name('signUpForm');
 
-Route::post('/form', 'SignUpController@signUp')
+Route::post('/sign-up', 'SignUpController@signUp')
     ->name('signUp');
 
-//Route::get('/sign-in', '');
-//Route::post('/sign-in', '');
+Route::get('/sign-in', 'AuthController@showSignInForm')
+    ->name('showSignInForm');
+Route::post('/sign-in', 'AuthController@signIn')
+    ->name('signIn');
 //
 //Route::get('/sign-out', '');
-//Route::get('/dashbord', '');
+Route::get('/dashboard', 'DashboardController@list')
+    ->name('dashboard');
 //
 //Route::post('/wish/new', '')
 //    ->name('createWish');

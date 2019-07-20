@@ -9,8 +9,10 @@ use packages\LastWish\Application\SignUpValidationServiceInterFace;
 
 class SignUpController extends Controller
 {
+    /** @var SignUpServiceInterface */
     private $signUpService;
 
+    /** @var SignUpValidationServiceInterFace */
     private $validationService;
 
     public function __construct(

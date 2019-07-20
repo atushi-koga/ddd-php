@@ -20,11 +20,15 @@ class UserRepository implements UserRepositoryInterface
 
     public function ofEmail(Email $email): ?User
     {
-        $user = $this->model->where('email', $email->value())
+        $eloquentUser = $this->model->where('email', $email->value())
             ->first();
 
-        if ($user) {
-            return User::of(Email::of($user->email));
+        if ($eloquentUser) {
+            $user = User::of(Email::of($eloquentUser->email));
+            $user->setHashPassword($eloquentUser->password);
+            $user->setId($eloquentUser->id);
+
+            return $user;
         }
 
         return null;
